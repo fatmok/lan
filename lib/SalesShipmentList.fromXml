@@ -1,0 +1,80 @@
+import 'package:xml/xml.dart' as xml;
+
+class SalesShipment {
+  bool dispatchedField;
+  bool dispatchedFieldSpecified;
+  String? handledByField;
+  String keyField;
+  String noField;
+  String? numberPlateField;
+  String sellToCustomerNameField;
+  String sellToCustomerName2Field;
+  String sellToCustomerNoField;
+  String shipToAddressField;
+  String shipToAddress2Field;
+  String? shipToAddress2ChineseField;
+  String shipToAddressChineseField;
+  DateTime shipmentDateField;
+  bool shipmentDateFieldSpecified;
+  String statusField;
+  bool statusFieldSpecified;
+
+  SalesShipment({
+    required this.dispatchedField,
+    required this.dispatchedFieldSpecified,
+    this.handledByField,
+    required this.keyField,
+    required this.noField,
+    this.numberPlateField,
+    required this.sellToCustomerNameField,
+    required this.sellToCustomerName2Field,
+    required this.sellToCustomerNoField,
+    required this.shipToAddressField,
+    required this.shipToAddress2Field,
+    this.shipToAddress2ChineseField,
+    required this.shipToAddressChineseField,
+    required this.shipmentDateField,
+    required this.shipmentDateFieldSpecified,
+    required this.statusField,
+    required this.statusFieldSpecified,
+  });
+
+  factory SalesShipment.fromXml(xml.XmlElement element) {
+    return SalesShipment(
+      dispatchedField: element.getElement('dispatchedField')?.text == 'true',
+      dispatchedFieldSpecified: element.getElement('dispatchedFieldSpecified')?.text == 'true',
+      handledByField: element.getElement('handled_byField')?.text,
+      keyField: element.getElement('keyField')?.text ?? '',
+      noField: element.getElement('noField')?.text ?? '',
+      numberPlateField: element.getElement('number_PlateField')?.text,
+      sellToCustomerNameField: element.getElement('sell_to_Customer_NameField')?.text ?? '',
+      sellToCustomerName2Field: element.getElement('sell_to_Customer_Name_2Field')?.text ?? '',
+      sellToCustomerNoField: element.getElement('sell_to_Customer_NoField')?.text ?? '',
+      shipToAddressField: element.getElement('ship_to_AddressField')?.text ?? '',
+      shipToAddress2Field: element.getElement('ship_to_Address_2Field')?.text ?? '',
+      shipToAddress2ChineseField: element.getElement('ship_to_Address_2_ChineseField')?.text,
+      shipToAddressChineseField: element.getElement('ship_to_Address_ChineseField')?.text ?? '',
+      shipmentDateField: DateTime.parse(element.getElement('shipment_DateField')?.text ?? DateTime.now().toString()),
+      shipmentDateFieldSpecified: element.getElement('shipment_DateFieldSpecified')?.text == 'true',
+      statusField: element.getElement('statusField')?.text ?? '',
+      statusFieldSpecified: element.getElement('statusFieldSpecified')?.text == 'true',
+    );
+  }
+}
+
+class SalesShipmentList {
+  List<SalesShipment> salesShipments;
+
+  SalesShipmentList({required this.salesShipments});
+
+  factory SalesShipmentList.fromXml(String xmlString) {
+    final document = xml.XmlDocument.parse(xmlString);
+    print('Parsed XML Document: $document'); // 打印解析后的 XML 文档
+    final shipments = document.findAllElements('SalesShipment').map((element) {
+      print('Parsing SalesShipment element: $element'); // 打印正在解析的 SalesShipment 元素
+      return SalesShipment.fromXml(element);
+    }).toList();
+
+    return SalesShipmentList(salesShipments: shipments);
+  }
+}
