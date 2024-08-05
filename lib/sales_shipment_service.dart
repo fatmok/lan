@@ -1,22 +1,24 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+
 import 'sales_shipment_model.dart';
 
 class SalesShipmentService {
-  final String apiUrl =
-      'http://183.178.18.147:19100/api/salesshipment?ShipmentNo=&company=AIO%20Shop%20Limited&Onlyshownotready=1&DateFilter=..01/07/2024';
+  String constructApiUrl(
+      String company, bool onlyShowNotReady, String dateFilter) {
+    final String encodedCompany = Uri.encodeComponent(company);
+    final String onlyShowNotReadyParam = onlyShowNotReady ? '1' : '0';
+    return 'http://183.178.18.147:19100/api/salesshipment?ShipmentNo=&company=$encodedCompany&Onlyshownotready=$onlyShowNotReadyParam&DateFilter=$dateFilter';
+  }
 
-  Future<SalesShipmentList> getSalesShipments() async {
-    final response = await http.get(Uri.parse(apiUrl));
+  Future<SalesShipmentList> getSalesShipments(
+      String company, bool onlyShowNotReady, String dateFilter) async {
+    final String url = constructApiUrl(company, onlyShowNotReady, dateFilter);
+    final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
-      print('JSON Response: ${response.body}'); // 打印原始 JSON 数据
-      final jsonData = json.decode(response.body);
-      print('Parsed JSON: $jsonData'); // 打印解析后的 JSON 数据
-      final salesShipmentList = SalesShipmentList.fromJson(jsonData);
-      print(
-          'Parsed SalesShipmentList: ${salesShipmentList.salesShipments}'); // 打印解析后的 SalesShipmentList
-      return salesShipmentList;
+      return SalesShipmentList.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load sales shipments');
     }

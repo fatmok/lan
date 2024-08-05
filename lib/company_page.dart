@@ -2,34 +2,51 @@ import 'package:flutter/material.dart';
 
 class CompanyPage extends StatelessWidget {
   final List<String> companies = [
-    'Company A',
-    'Company B',
-    'Company C',
-    'Company D',
+    'AIO Shop Limited',
+    'Lingwei (Tainjin) Co Ltd',
+    'MAS_LIV_bkp',
+    'MES (Tianjin) Steel Pipe Ltd',
+    'MES Cable Management Sys Ltd',
+    'Michelle_LIV',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Companies')),
+      appBar: AppBar(
+        title: Text('Companies'),
+        backgroundColor: Colors.lightBlueAccent,
+      ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: companies.map((company) {
+        child: ListView.builder(
+          itemCount: companies.length,
+          itemBuilder: (context, index) {
             return Padding(
               padding: EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                  textStyle: TextStyle(fontSize: 24),
-                ),
+              child: MaterialButton(
                 onPressed: () {
-                  // Handle button press
+                  Navigator.pushNamed(
+                    context,
+                    '/application',
+                    arguments: companies[index],
+                  );
                 },
-                child: Text(company),
+                color: Colors.lightBlueAccent,
+                textColor: Colors.white,
+                padding: EdgeInsets.symmetric(vertical: 20),
+                child: Text(
+                  companies[index],
+                  style: TextStyle(fontSize: 24),
+                  textAlign: TextAlign.center,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                minWidth: MediaQuery.of(context).size.width -
+                    16, // Set button width to screen width minus padding
               ),
             );
-          }).toList(),
+          },
         ),
       ),
     );

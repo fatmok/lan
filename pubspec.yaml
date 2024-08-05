@@ -33,6 +33,7 @@ dependencies:
   http: ^1.2.2
   xml2json: ^6.2.3
   xml: ^6.5.0
+  intl: ^0.17.0 # 添加这个依赖项
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
