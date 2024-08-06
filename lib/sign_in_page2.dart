@@ -15,6 +15,7 @@ class SignInPage2 extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: const [
                   _Logo(),
+                  SizedBox(height: 20), // 增加 Logo 和表单之间的间距
                   _FormContent(),
                 ],
               )
@@ -25,7 +26,15 @@ class SignInPage2 extends StatelessWidget {
                   children: const [
                     Expanded(child: _Logo()),
                     Expanded(
-                      child: Center(child: _FormContent()),
+                      child: Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(height: 20), // 增加 Logo 和表单之间的间距
+                            _FormContent(),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -40,24 +49,13 @@ class _Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        FlutterLogo(size: isSmallScreen ? 100 : 200),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            "Welcome to Flutter!",
-            textAlign: TextAlign.center,
-            style: isSmallScreen
-                ? Theme.of(context).textTheme.headlineSmall
-                : Theme.of(context)
-                    .textTheme
-                    .headlineMedium
-                    ?.copyWith(color: Colors.black),
-          ),
+        Image.asset(
+          'assets/images/mes.jpg', // 显示上传的图片
+          width: 150, // 调整 Logo 的宽度
+          height: 150, // 调整 Logo 的高度
         ),
       ],
     );
@@ -73,7 +71,6 @@ class _FormContent extends StatefulWidget {
 
 class __FormContentState extends State<_FormContent> {
   bool _isPasswordVisible = false;
-  bool _rememberMe = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _loginNameController = TextEditingController();
@@ -138,20 +135,8 @@ class __FormContentState extends State<_FormContent> {
               ),
             ),
             _gap(),
-            CheckboxListTile(
-              value: _rememberMe,
-              onChanged: (value) {
-                if (value == null) return;
-                setState(() {
-                  _rememberMe = value;
-                });
-              },
-              title: const Text('Remember me'),
-              controlAffinity: ListTileControlAffinity.leading,
-              dense: true,
-              contentPadding: const EdgeInsets.all(0),
-            ),
-            _gap(),
+            // 移除 Remember me 的 CheckboxListTile
+            // _gap(), // 如果不需要额外的间距可以移除这一行
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(

@@ -10,13 +10,13 @@ class CompanyPage extends StatelessWidget {
     'Michelle_LIV',
   ];
 
-  CompanyPage({Key? key}) : super(key: key); // 移除 const 构造函数
+  CompanyPage({super.key}); // 移除 const 构造函数
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Companies'),
+        title: const Text('Companies'),
         backgroundColor: Colors.lightBlueAccent,
       ),
       body: Center(
@@ -24,7 +24,7 @@ class CompanyPage extends StatelessWidget {
           itemCount: companies.length,
           itemBuilder: (context, index) {
             return Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: MaterialButton(
                 onPressed: () {
                   Navigator.pushNamed(
@@ -35,17 +35,17 @@ class CompanyPage extends StatelessWidget {
                 },
                 color: Colors.lightBlueAccent,
                 textColor: Colors.white,
-                padding: EdgeInsets.symmetric(vertical: 20),
-                child: Text(
-                  companies[index],
-                  style: TextStyle(fontSize: 24),
-                  textAlign: TextAlign.center,
-                ),
+                padding: const EdgeInsets.symmetric(vertical: 20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 minWidth: MediaQuery.of(context).size.width -
-                    16, // Set button width to screen width minus padding
+                    16,
+                child: Text(
+                  companies[index],
+                  style: const TextStyle(fontSize: 24),
+                  textAlign: TextAlign.center,
+                ), // Set button width to screen width minus padding
               ),
             );
           },
