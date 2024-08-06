@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'bottom_nav_bar.dart'; // 导入底部导航栏组件
 
 class CompanyDetailsPage extends StatefulWidget {
+  const CompanyDetailsPage({super.key});
+
   @override
   _CompanyDetailsPageState createState() => _CompanyDetailsPageState();
 }
 
 class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
-  int _selectedIndex = 0;
+  final int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
     if (index == 0) {
@@ -27,11 +29,11 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Company Details'),
+        title: const Text('Company Details'),
       ),
       body: Center(
         child: Text('Selected Company: $companyName',
-            style: TextStyle(fontSize: 24)),
+            style: const TextStyle(fontSize: 24)),
       ),
       bottomNavigationBar: BottomNavBar(
         selectedIndex: _selectedIndex,

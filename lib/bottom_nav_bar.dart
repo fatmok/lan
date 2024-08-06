@@ -12,27 +12,42 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: selectedIndex,
-      onTap: onItemTapped,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: '首頁',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.apps),
-          label: '應用',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: '我的',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.logout),
-          label: '登出',
-        ),
-      ],
+    return Container(
+      color: Colors.lightBlueAccent, // 设置背景颜色
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          _buildNavItem(icon: Icons.home, label: '首頁', index: 0),
+          _buildNavItem(icon: Icons.apps, label: '應用', index: 1),
+          _buildNavItem(icon: Icons.person, label: '我的', index: 2),
+          _buildNavItem(icon: Icons.logout, label: '登出', index: 3),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNavItem(
+      {required IconData icon, required String label, required int index}) {
+    final bool isSelected = index == selectedIndex;
+
+    return GestureDetector(
+      onTap: () => onItemTapped(index),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Icon(
+            icon,
+            color: isSelected ? Colors.white : Colors.white70,
+          ),
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? Colors.white : Colors.white70,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

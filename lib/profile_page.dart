@@ -5,16 +5,16 @@ class ProfilePage extends StatelessWidget {
   final String companyName;
 
   const ProfilePage({
-    Key? key,
+    super.key,
     required this.loginName,
     required this.companyName,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('個人資料'),
+        title: const Text('個人資料'),
         backgroundColor: Colors.lightBlueAccent,
       ),
       body: Padding(
@@ -24,12 +24,12 @@ class ProfilePage extends StatelessWidget {
           children: [
             Text(
               '登入名稱: $loginName',
-              style: TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 20),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               '已選公司名稱: $companyName',
-              style: TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 20),
             ),
           ],
         ),

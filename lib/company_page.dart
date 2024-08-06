@@ -10,6 +10,8 @@ class CompanyPage extends StatelessWidget {
     'Michelle_LIV',
   ];
 
+  CompanyPage({Key? key}) : super(key: key); // 移除 const 构造函数
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

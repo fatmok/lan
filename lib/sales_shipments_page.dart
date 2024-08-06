@@ -6,7 +6,7 @@ import 'sales_shipment_model.dart';
 import 'sales_shipment_service.dart';
 
 class SalesShipmentsPage extends StatefulWidget {
-  const SalesShipmentsPage({Key? key}) : super(key: key);
+  const SalesShipmentsPage({super.key});
 
   @override
   _SalesShipmentsPageState createState() => _SalesShipmentsPageState();
@@ -14,7 +14,7 @@ class SalesShipmentsPage extends StatefulWidget {
 
 class _SalesShipmentsPageState extends State<SalesShipmentsPage> {
   Future<SalesShipmentList>? futureSalesShipments;
-  int _selectedIndex = 1; // 设置默认选中的索引
+  final int _selectedIndex = 1; // 设置默认选中的索引
   bool _onlyShowNotReady = true;
   DateTime? _selectedDate;
   String _companyName = '';
@@ -62,14 +62,14 @@ class _SalesShipmentsPageState extends State<SalesShipmentsPage> {
         _companyName,
         _onlyShowNotReady,
         _selectedDate != null
-            ? '..${DateFormat('dd/MM/yyyy').format(_selectedDate!)}'
+            ? DateFormat('dd/MM/yyyy').format(_selectedDate!)
             : '',
       );
       futureSalesShipments = SalesShipmentService().getSalesShipments(
         _companyName,
         _onlyShowNotReady,
         _selectedDate != null
-            ? '..${DateFormat('dd/MM/yyyy').format(_selectedDate!)}'
+            ? DateFormat('dd/MM/yyyy').format(_selectedDate!)
             : '',
       );
     });
@@ -88,7 +88,7 @@ class _SalesShipmentsPageState extends State<SalesShipmentsPage> {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: Text(
                     '只顯示未完成',
                     style: TextStyle(fontSize: 16),
@@ -114,12 +114,12 @@ class _SalesShipmentsPageState extends State<SalesShipmentsPage> {
                     _selectedDate == null
                         ? '選擇日期'
                         : '選擇日期: ${DateFormat('dd/MM/yyyy').format(_selectedDate!)}',
-                    style: TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
                 ElevatedButton(
                   onPressed: () => _selectDate(context),
-                  child: Text('選擇日期'),
+                  child: const Text('選擇日期'),
                 ),
               ],
             ),
@@ -131,23 +131,21 @@ class _SalesShipmentsPageState extends State<SalesShipmentsPage> {
                 backgroundColor: Colors.lightBlueAccent, // 设置按钮的背景颜色为浅蓝色
               ),
               onPressed: _fetchShipments,
-              child: Text('取得資料'),
+              child: const Text('取得資料'),
             ),
           ),
           if (_apiUrl.isNotEmpty)
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text('API URL: $_apiUrl', style: TextStyle(fontSize: 16)),
+              child: Text('API URL: $_apiUrl', style: const TextStyle(fontSize: 16)),
             ),
           Expanded(
             child: futureSalesShipments == null
-                ? Center(
+                ? const Center(
                     child: Text('Please select filters and fetch shipments.'))
                 : FutureBuilder<SalesShipmentList>(
                     future: futureSalesShipments,
                     builder: (context, snapshot) {
-                      print(
-                          'FutureBuilder snapshot: ${snapshot.data}'); // 打印 FutureBuilder 的快照数据
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
                       } else if (snapshot.hasError) {

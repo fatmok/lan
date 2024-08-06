@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'bottom_nav_bar.dart';
+import 'bottom_nav_bar.dart'; // 确保导入 BottomNavBar 组件
 
 class ApplicationPage extends StatefulWidget {
   @override
