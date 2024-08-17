@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'default_credentials.dart'; // 导入默认登录信息
 
 class SignInPage2 extends StatelessWidget {
-  const SignInPage2({Key? key}) : super(key: key);
+  const SignInPage2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +11,9 @@ class SignInPage2 extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: isSmallScreen
-            ? Column(
+            ? const Column(
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   _Logo(),
                   SizedBox(height: 20), // 增加 Logo 和表单之间的间距
                   _FormContent(),
@@ -22,8 +22,8 @@ class SignInPage2 extends StatelessWidget {
             : Container(
                 padding: const EdgeInsets.all(32.0),
                 constraints: const BoxConstraints(maxWidth: 800),
-                child: Row(
-                  children: const [
+                child: const Row(
+                  children: [
                     Expanded(child: _Logo()),
                     Expanded(
                       child: Center(
@@ -45,7 +45,7 @@ class SignInPage2 extends StatelessWidget {
 }
 
 class _Logo extends StatelessWidget {
-  const _Logo({Key? key}) : super(key: key);
+  const _Logo();
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +63,7 @@ class _Logo extends StatelessWidget {
 }
 
 class _FormContent extends StatefulWidget {
-  const _FormContent({Key? key}) : super(key: key);
+  const _FormContent();
 
   @override
   State<_FormContent> createState() => __FormContentState();
